@@ -8,6 +8,11 @@ namespace Krypteringsprogram
 {
     internal class Program
     {
+        string letters = "abcdefghijklmnopqrstuvwxyz";
+        string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string numbers = "0123456789";
+        string special = "!\"@#£¤$%&/{([)]=}?+´`|¨^~'*-_.:,; ";
+
         static void Main(string[] args)
         {
             while (true)
@@ -50,11 +55,11 @@ namespace Krypteringsprogram
             string output = "";
             int count = 0;
             
-            //TODO split into methos
+            //TODO split into methods
             //TODO create pincode
             for(int i = 0; i < str.Length; i++)
             {
-                if (special.Contains(str[i]))
+                if (special.Contains(str[i])) //if(GenerateSpecial(str[i]))
                 {
                     count = special.IndexOf(str[i]);
                     if (count + 2 > special.Length - 1)
@@ -66,7 +71,7 @@ namespace Krypteringsprogram
                         output += special[count + 2];
                     }
                 }
-                else if (letters.Contains(str[i]))
+                else if (letters.Contains(str[i])) //else if(GenerateLetters(str[i]))
                 {
                     count = letters.IndexOf(str[i]);
                     if(count + 3 > letters.Length-1)
@@ -81,7 +86,7 @@ namespace Krypteringsprogram
                 else if (capLetters.Contains(str[i]))
                 {
                     count = capLetters.IndexOf(str[i]);
-                    if (count + 4 > capLetters.Length - 1)
+                    if (count + 4 > capLetters.Length - 1) //else if(GenerateCapLetters(str[i]))
                     {
                         output += capLetters[(count + 4) - capLetters.Length];
                     }
@@ -93,7 +98,7 @@ namespace Krypteringsprogram
                 else
                 {
                     count = numbers.IndexOf(str[i]);
-                    if (count + 6 > numbers.Length - 1)
+                    if (count + 6 > numbers.Length - 1) //else(GenerateNumbers(str[i]))
                     {
                         output += numbers[(count + 6) - numbers.Length];
                     }
@@ -169,6 +174,26 @@ namespace Krypteringsprogram
                 }
             }
             return output;
+        }
+
+        static char GenerateSpecial(char c)
+        {
+
+        }
+
+        static char GenerateLetters(char c)
+        {
+
+        }
+
+        static char GenerateCapLetters(char c)
+        {
+
+        }
+
+        static char GenerateNumbers(char c)
+        {
+
         }
     }
 }
