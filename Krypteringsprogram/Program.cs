@@ -65,7 +65,7 @@ namespace Krypteringsprogram
             {
                 if (special.Contains(str[i])) //if(GenerateSpecial(str[i], pin[0]))
                 {
-                    pinNr = Convert.ToInt32(pin[0]);
+                    pinNr = Convert.ToInt32(pin[0].ToString());
                     count = special.IndexOf(str[i]);
                     if (count + pinNr > special.Length - 1)
                     {
@@ -78,7 +78,7 @@ namespace Krypteringsprogram
                 }
                 else if (letters.Contains(str[i])) //else if(GenerateLetters(str[i], pin[1]))
                 {
-                    pinNr = Convert.ToInt32(pin[1]);
+                    pinNr = Convert.ToInt32(pin[1].ToString());
                     count = letters.IndexOf(str[i]);
                     if(count + pinNr > letters.Length-1)
                     {
@@ -91,7 +91,7 @@ namespace Krypteringsprogram
                 }
                 else if (capLetters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[2]);
+                    pinNr = Convert.ToInt32(pin[2].ToString());
                     count = capLetters.IndexOf(str[i]);
                     if (count + pinNr > capLetters.Length - 1) //else if(GenerateCapLetters(str[i], pin[2]))
                     {
@@ -104,7 +104,7 @@ namespace Krypteringsprogram
                 }
                 else
                 {
-                    pinNr = Convert.ToInt32(pin[3]);
+                    pinNr = Convert.ToInt32(pin[3].ToString());
                     count = numbers.IndexOf(str[i]);
                     if (count + pinNr > numbers.Length - 1) //else(GenerateNumbers(str[i], pin[3]))
                     {
@@ -135,24 +135,24 @@ namespace Krypteringsprogram
             {
                 if (special.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[0]);
+                    pinNr = Convert.ToInt32(pin[0].ToString());
                     count = special.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += special[(special.Length) + (count - pinNr)]; //TODO get's the wrong index number
+                        output += special[(special.Length) + (count - pinNr)];
                     }
                     else
                     {
                         output += special[count - pinNr];
-                    }
+                    } 
                 }
                 else if (letters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[1]);
+                    pinNr = Convert.ToInt32(pin[1].ToString());
                     count = letters.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += letters[letters.Length + (count - pinNr)]; //TODO get's the wrong index number
+                        output += letters[letters.Length + (count - pinNr)];
                     }
                     else
                     {
@@ -161,11 +161,11 @@ namespace Krypteringsprogram
                 }
                 else if (capLetters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[2]);
+                    pinNr = Convert.ToInt32(pin[2].ToString());
                     count = capLetters.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += capLetters[capLetters.Length + (count - pinNr)]; //TODO get's the wrong index number
+                        output += capLetters[capLetters.Length + (count - pinNr)];
                     }
                     else
                     {
@@ -174,11 +174,11 @@ namespace Krypteringsprogram
                 }
                 else
                 {
-                    pinNr = Convert.ToInt32(pin[3]);
+                    pinNr = Convert.ToInt32(pin[3].ToString());
                     count = numbers.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += numbers[numbers.Length + (count - pinNr)]; //TODO get's the wrong index number
+                        output += numbers[numbers.Length + (count - pinNr)];
                     }
                     else
                     {
