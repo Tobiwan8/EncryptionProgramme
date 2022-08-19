@@ -30,7 +30,7 @@ namespace Krypteringsprogram
             {
                 case ConsoleKey.NumPad1:
                 case ConsoleKey.D1:
-                    Console.WriteLine("Indtast sætning: ");
+                    Console.WriteLine("Indtast sætning for kryptering: ");
                     string s = Console.ReadLine();
                     Console.WriteLine("Indtast pinkode: ");
                     string pincode = Console.ReadLine();
@@ -38,7 +38,7 @@ namespace Krypteringsprogram
                     break;
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.D2:
-                    Console.WriteLine("Indtast sætning: ");
+                    Console.WriteLine("Indtast sætning for dekryptering: ");
                     s = Console.ReadLine();
                     Console.WriteLine("Indtast pinkode: ");
                     pincode = Console.ReadLine();
@@ -66,11 +66,10 @@ namespace Krypteringsprogram
                 if (special.Contains(str[i])) //if(GenerateSpecial(str[i], pin[0]))
                 {
                     pinNr = Convert.ToInt32(pin[0]);
-                    if(pinNr == 1) { pinNr = 5; }
                     count = special.IndexOf(str[i]);
                     if (count + pinNr > special.Length - 1)
                     {
-                        output += special[(count + pinNr) % (special.Length - 1)];
+                        output += special[(count + pinNr) % (special.Length)];
                     }
                     else
                     {
@@ -80,11 +79,10 @@ namespace Krypteringsprogram
                 else if (letters.Contains(str[i])) //else if(GenerateLetters(str[i], pin[1]))
                 {
                     pinNr = Convert.ToInt32(pin[1]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = letters.IndexOf(str[i]);
                     if(count + pinNr > letters.Length-1)
                     {
-                        output += letters[(count + pinNr) % (letters.Length - 1)];
+                        output += letters[(count + pinNr) % (letters.Length)];
                     }
                     else
                     {
@@ -94,11 +92,10 @@ namespace Krypteringsprogram
                 else if (capLetters.Contains(str[i]))
                 {
                     pinNr = Convert.ToInt32(pin[2]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = capLetters.IndexOf(str[i]);
                     if (count + pinNr > capLetters.Length - 1) //else if(GenerateCapLetters(str[i], pin[2]))
                     {
-                        output += capLetters[(count + pinNr) % (capLetters.Length - 1)];
+                        output += capLetters[(count + pinNr) % (capLetters.Length)];
                     }
                     else
                     {
@@ -108,11 +105,10 @@ namespace Krypteringsprogram
                 else
                 {
                     pinNr = Convert.ToInt32(pin[3]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = numbers.IndexOf(str[i]);
                     if (count + pinNr > numbers.Length - 1) //else(GenerateNumbers(str[i], pin[3]))
                     {
-                        output += numbers[(count + pinNr) % (numbers.Length - 1)];
+                        output += numbers[(count + pinNr) % (numbers.Length)];
                     }
                     else
                     {
@@ -133,18 +129,17 @@ namespace Krypteringsprogram
             int count = 0;
             int pinNr = 0;
 
-            //TODO split into methos
+            //TODO split into methods
             //TODO create pincode reader
             for (int i = 0; i < str.Length; i++)
             {
                 if (special.Contains(str[i]))
                 {
                     pinNr = Convert.ToInt32(pin[0]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = special.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += special[special.Length - (count - pinNr)];
+                        output += special[(special.Length) + (count - pinNr)]; //TODO get's the wrong index number
                     }
                     else
                     {
@@ -154,11 +149,10 @@ namespace Krypteringsprogram
                 else if (letters.Contains(str[i]))
                 {
                     pinNr = Convert.ToInt32(pin[1]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = letters.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += letters[letters.Length + (count - pinNr)];
+                        output += letters[letters.Length + (count - pinNr)]; //TODO get's the wrong index number
                     }
                     else
                     {
@@ -168,11 +162,10 @@ namespace Krypteringsprogram
                 else if (capLetters.Contains(str[i]))
                 {
                     pinNr = Convert.ToInt32(pin[2]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = capLetters.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += capLetters[capLetters.Length + (count - pinNr)];
+                        output += capLetters[capLetters.Length + (count - pinNr)]; //TODO get's the wrong index number
                     }
                     else
                     {
@@ -182,11 +175,10 @@ namespace Krypteringsprogram
                 else
                 {
                     pinNr = Convert.ToInt32(pin[3]);
-                    if (pinNr == 2) { pinNr = 1; }
                     count = numbers.IndexOf(str[i]);
                     if (count - pinNr < 0)
                     {
-                        output += numbers[numbers.Length + (count - pinNr)];
+                        output += numbers[numbers.Length + (count - pinNr)]; //TODO get's the wrong index number
                     }
                     else
                     {
