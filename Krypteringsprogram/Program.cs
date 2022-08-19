@@ -9,10 +9,15 @@ namespace Krypteringsprogram
 {
     internal class Program
     {
-        /*string letters = "abcdefghijklmnopqrstuvwxyz";
-        string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        string numbers = "0123456789";
-        string special = "!\"@#£¤$%&/{([)]=}?+´`|¨^~'*-_.:,; ";*/
+        static string letters = "abcdefghijklmnopqrstuvwxyz";
+        static string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        static string numbers = "0123456789";
+        static string special = "!\"@#£¤$%&/{([)]=}?+´`|¨^~'*-_.:,; ";
+        static string output = "";
+        static int count = 0;
+        static int pinNr = 0;
+        static string s = "";
+        static string pincode = "";
 
         static void Main(string[] args)
         {
@@ -30,19 +35,11 @@ namespace Krypteringsprogram
             {
                 case ConsoleKey.NumPad1:
                 case ConsoleKey.D1:
-                    Console.WriteLine("Indtast sætning for kryptering: ");
-                    string s = Console.ReadLine();
-                    Console.WriteLine("Indtast pinkode: ");
-                    string pincode = Console.ReadLine();
-                    Console.WriteLine(GenerateCode(s, pincode));
+                    GenerateOption();
                     break;
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.D2:
-                    Console.WriteLine("Indtast sætning for dekryptering: ");
-                    s = Console.ReadLine();
-                    Console.WriteLine("Indtast pinkode: ");
-                    pincode = Console.ReadLine();
-                    Console.WriteLine(TranslateCode(s, pincode));
+                    DecryptOption();
                     break;
                 default:
                     break;
@@ -51,69 +48,25 @@ namespace Krypteringsprogram
 
         static string GenerateCode(string str, string pin)
         {
-            string letters = "abcdefghijklmnopqrstuvwxyz";
-            string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string numbers = "0123456789";
-            string special = "!\"@#£¤$%&/{([)]=}?+´`|¨^~'*-_.:,; ";
-            string output = "";
-            int count = 0;
-            int pinNr = 0;
+            output = "";
             
-            //TODO split into methods
-            //TODO create pincode
             for(int i = 0; i < str.Length; i++)
             {
-                if (special.Contains(str[i])) //if(GenerateSpecial(str[i], pin[0]))
+                if (special.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[0].ToString());
-                    count = special.IndexOf(str[i]);
-                    if (count + pinNr > special.Length - 1)
-                    {
-                        output += special[(count + pinNr) % (special.Length)];
-                    }
-                    else
-                    {
-                        output += special[count + pinNr];
-                    }
+                    GenerateSpecial(str, pin, i);
                 }
-                else if (letters.Contains(str[i])) //else if(GenerateLetters(str[i], pin[1]))
+                else if (letters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[1].ToString());
-                    count = letters.IndexOf(str[i]);
-                    if(count + pinNr > letters.Length-1)
-                    {
-                        output += letters[(count + pinNr) % (letters.Length)];
-                    }
-                    else
-                    {
-                        output += letters[count + pinNr];
-                    }
+                    GenerateLetters(str, pin, i);
                 }
                 else if (capLetters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[2].ToString());
-                    count = capLetters.IndexOf(str[i]);
-                    if (count + pinNr > capLetters.Length - 1) //else if(GenerateCapLetters(str[i], pin[2]))
-                    {
-                        output += capLetters[(count + pinNr) % (capLetters.Length)];
-                    }
-                    else
-                    {
-                        output += capLetters[count + pinNr];
-                    }
+                    GenerateCapLetters(str, pin, i);
                 }
                 else
                 {
-                    pinNr = Convert.ToInt32(pin[3].ToString());
-                    count = numbers.IndexOf(str[i]);
-                    if (count + pinNr > numbers.Length - 1) //else(GenerateNumbers(str[i], pin[3]))
-                    {
-                        output += numbers[(count + pinNr) % (numbers.Length)];
-                    }
-                    else
-                    {
-                        output += numbers[count + pinNr];
-                    }
+                    GenerateNumbers(str, pin, i);
                 }
             }
             return output;
@@ -121,92 +74,160 @@ namespace Krypteringsprogram
 
         static string TranslateCode(string str, string pin)
         {
-            string letters = "abcdefghijklmnopqrstuvwxyz";
-            string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string numbers = "0123456789";
-            string special = "!\"@#£¤$%&/{([)]=}?+´`|¨^~'*-_.:,; ";
-            string output = "";
-            int count = 0;
-            int pinNr = 0;
+            output = "";
 
-            //TODO split into methods
-            //TODO create pincode reader
             for (int i = 0; i < str.Length; i++)
             {
                 if (special.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[0].ToString());
-                    count = special.IndexOf(str[i]);
-                    if (count - pinNr < 0)
-                    {
-                        output += special[(special.Length) + (count - pinNr)];
-                    }
-                    else
-                    {
-                        output += special[count - pinNr];
-                    } 
+                    DecryptSpecial(str, pin, i);
                 }
                 else if (letters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[1].ToString());
-                    count = letters.IndexOf(str[i]);
-                    if (count - pinNr < 0)
-                    {
-                        output += letters[letters.Length + (count - pinNr)];
-                    }
-                    else
-                    {
-                        output += letters[count - pinNr];
-                    }
+                    DecryptLetters(str, pin, i);
                 }
                 else if (capLetters.Contains(str[i]))
                 {
-                    pinNr = Convert.ToInt32(pin[2].ToString());
-                    count = capLetters.IndexOf(str[i]);
-                    if (count - pinNr < 0)
-                    {
-                        output += capLetters[capLetters.Length + (count - pinNr)];
-                    }
-                    else
-                    {
-                        output += capLetters[count - pinNr];
-                    }
+                    DecryptCapLetters(str, pin, i);
                 }
                 else
                 {
-                    pinNr = Convert.ToInt32(pin[3].ToString());
-                    count = numbers.IndexOf(str[i]);
-                    if (count - pinNr < 0)
-                    {
-                        output += numbers[numbers.Length + (count - pinNr)];
-                    }
-                    else
-                    {
-                        output += numbers[count - pinNr];
-                    }
+                    DecryptNumbers(str, pin, i);
                 }
             }
             return output;
         }
 
-        /*static char GenerateSpecial(char c, char cPin)
+        
+        
+        static void GenerateOption()
         {
-
+            Console.WriteLine("Indtast sætning for kryptering: ");
+            s = Console.ReadLine();
+            Console.WriteLine("Indtast pinkode: ");
+            pincode = Console.ReadLine();
+            Console.WriteLine(GenerateCode(s, pincode));
         }
 
-        static char GenerateLetters(char c, char cPin)
+        static void DecryptOption()
         {
-
+            Console.WriteLine("Indtast sætning for dekryptering: ");
+            s = Console.ReadLine();
+            Console.WriteLine("Indtast pinkode: ");
+            pincode = Console.ReadLine();
+            Console.WriteLine(TranslateCode(s, pincode));
+        }
+        
+        static void GenerateSpecial(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[0].ToString());
+            count = special.IndexOf(str[i]);
+            if (count + pinNr > special.Length - 1)
+            {
+                output += special[(count + pinNr) % (special.Length)];
+            }
+            else
+            {
+                output += special[count + pinNr];
+            }
+        }
+        
+        static void GenerateLetters(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[1].ToString());
+            count = letters.IndexOf(str[i]);
+            if (count + pinNr > letters.Length - 1)
+            {
+                output += letters[(count + pinNr) % (letters.Length)];
+            }
+            else
+            {
+                output += letters[count + pinNr];
+            }
+        }
+        
+        static void GenerateCapLetters(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[2].ToString());
+            count = capLetters.IndexOf(str[i]);
+            if (count + pinNr > capLetters.Length - 1)
+            {
+                output += capLetters[(count + pinNr) % (capLetters.Length)];
+            }
+            else
+            {
+                output += capLetters[count + pinNr];
+            }
         }
 
-        static char GenerateCapLetters(char c, char cPin)
+        static void GenerateNumbers(string str, string pin, int i)
         {
-
+            pinNr = Convert.ToInt32(pin[3].ToString());
+            count = numbers.IndexOf(str[i]);
+            if (count + pinNr > numbers.Length - 1)
+            {
+                output += numbers[(count + pinNr) % (numbers.Length)];
+            }
+            else
+            {
+                output += numbers[count + pinNr];
+            }
+        }
+        
+        static void DecryptSpecial(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[0].ToString());
+            count = special.IndexOf(str[i]);
+            if (count - pinNr < 0)
+            {
+                output += special[(special.Length) + (count - pinNr)];
+            }
+            else
+            {
+                output += special[count - pinNr];
+            }
         }
 
-        static char GenerateNumbers(char c, char cPin)
+        static void DecryptLetters(string str, string pin, int i)
         {
+            pinNr = Convert.ToInt32(pin[1].ToString());
+            count = letters.IndexOf(str[i]);
+            if (count - pinNr < 0)
+            {
+                output += letters[letters.Length + (count - pinNr)];
+            }
+            else
+            {
+                output += letters[count - pinNr];
+            }
+        }
 
-        }*/
+        static void DecryptCapLetters(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[2].ToString());
+            count = capLetters.IndexOf(str[i]);
+            if (count - pinNr < 0)
+            {
+                output += capLetters[capLetters.Length + (count - pinNr)];
+            }
+            else
+            {
+                output += capLetters[count - pinNr];
+            }
+        }
+
+        static void DecryptNumbers(string str, string pin, int i)
+        {
+            pinNr = Convert.ToInt32(pin[3].ToString());
+            count = numbers.IndexOf(str[i]);
+            if (count - pinNr < 0)
+            {
+                output += numbers[numbers.Length + (count - pinNr)];
+            }
+            else
+            {
+                output += numbers[count - pinNr];
+            }
+        }
     }
 }
