@@ -1,0 +1,19 @@
+udskift bogstaver med bogstavets index+1 + index. Hvis index+1 + index > end letters.Length - start
+forfra.
+udskift tal med tallets index+1 + index. Hvis index+1 + index > end numbers.Length - start
+forfra.
+
+output = indexet af første tegn + 1 + index
+
+output[0]
+
+khm plw qdyq hu REZR 789
+
+LAV EN PINKODE
+Flere metoder
+Brug TODO
+
+if(count + pinNr > numbers.Length)
+output += letters[(count + pinNr) % (letters.Length)];
+
+if(count - pinNr < 0)
