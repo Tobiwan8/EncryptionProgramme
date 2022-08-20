@@ -53,7 +53,51 @@ namespace Krypteringsprogram
                 default:
                     break;
             }
-        }    
+        }
+        
+        static void GenerateOption()
+        {
+            //User inputs sentence they want to encrypt
+            Console.Write("Indtast sætning for kryptering: ");
+            s = Console.ReadLine();
+            //asks user for a 4 digit code - will run untill they do
+            do
+            {
+                Console.Write("Indtast 4-cifret pinkode: ");
+                pincode = Console.ReadLine();
+            } while (CheckIfValidPincode(pincode) == false);
+            //Runs and outputs the GenerateCode method.
+            Console.WriteLine("\n" + GenerateCode(s, pincode));
+        }
+        
+        static void DecryptOption()
+        {
+            //Comments are the same as GenerateOption - but for decryption instead.
+            Console.Write("Indtast sætning for dekryptering: ");
+            s = Console.ReadLine();
+            do
+            {
+                Console.Write("Indtast 4-cifret pinkode: ");
+                pincode = Console.ReadLine();
+            } while (CheckIfValidPincode(pincode) == false);
+            Console.WriteLine("\n" + TranslateCode(s, pincode));
+        }
+
+        static bool CheckIfValidPincode(string pin)
+        {
+            //if pin length is not 4, it will return false
+            if (pin.Length != 4) { return false; }
+
+            //runs through each char in pin
+            foreach (char num in pin)
+            {
+                //if the char is a digit, it will set validPin to true, and continue the loop
+                if (Char.IsDigit(num)) { validPin = true; }
+                //if char is not a digit, it will break the loop and return false.
+                else { return false; }
+            }
+            return validPin;
+        }
 
         static string GenerateCode(string str, string pin)
         {
@@ -115,34 +159,6 @@ namespace Krypteringsprogram
             return output;
         }
 
-        static void GenerateOption()
-        {
-            //User inputs sentence they want to encrypt
-            Console.Write("Indtast sætning for kryptering: ");
-            s = Console.ReadLine();
-            //asks user for a 4 digit code - will run untill they do
-            do
-            {
-                Console.Write("Indtast 4-cifret pinkode: ");
-                pincode = Console.ReadLine();
-            } while (CheckIfValidPincode(pincode) == false);
-            //Runs and outputs the GenerateCode method.
-            Console.WriteLine("\n" + GenerateCode(s, pincode));
-        }
-
-        static void DecryptOption()
-        {
-            //Comments are the same as GenerateOption - but for decryption instead.
-            Console.Write("Indtast sætning for dekryptering: ");
-            s = Console.ReadLine();
-            do
-            {
-                Console.Write("Indtast 4-cifret pinkode: ");
-                pincode = Console.ReadLine();
-            } while (CheckIfValidPincode(pincode) == false);
-            Console.WriteLine("\n" + TranslateCode(s, pincode));
-        }
-        
         static void GenerateSpecial(string str, string pin, int i)
         {
             //Takes the first digit of pincode to make encryption
@@ -279,20 +295,6 @@ namespace Krypteringsprogram
             }
         }
 
-        static bool CheckIfValidPincode(string pin)
-        {
-            //if pin length is not 4, it will return false
-            if (pin.Length != 4) { return false; }
-
-            //runs through each char in pin
-            foreach (char num in pin)
-            {
-                //if the char is a digit, it will set validPin to true, and continue the loop
-                if (Char.IsDigit(num)) { validPin = true; }
-                //if char is not a digit, it will break the loop and return false.
-                else { return false; }
-            }
-            return validPin;
-        }
+        
     }
 }
