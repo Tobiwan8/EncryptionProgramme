@@ -9,6 +9,9 @@ namespace Krypteringsprogram
 {
     internal class Program
     {
+        /* This programme lets you encrypt a sentence with a pincode. When you want to decrypt your sentence,
+         you'll have to enter the same pincode for it to turn back to your original sentence */
+        
         //All variables outside Main - created as fields
         static string letters = "abcdefghijklmnopqrstuvwxyz";
         static string capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -19,6 +22,7 @@ namespace Krypteringsprogram
         static int pinNr = 0;
         static string s = "";
         static string pincode = "";
+        static bool validPin;
 
         static void Main(string[] args)
         {
@@ -121,7 +125,7 @@ namespace Krypteringsprogram
             {
                 Console.Write("Indtast 4-cifret pinkode: ");
                 pincode = Console.ReadLine();
-            } while (pincode.Length != 4);
+            } while (CheckIfValidPincode(pincode) == false);
             //Runs and outputs the GenerateCode method.
             Console.WriteLine("\n" + GenerateCode(s, pincode));
         }
@@ -135,7 +139,7 @@ namespace Krypteringsprogram
             {
                 Console.Write("Indtast 4-cifret pinkode: ");
                 pincode = Console.ReadLine();
-            } while (pincode.Length != 4);
+            } while (CheckIfValidPincode(pincode) == false);
             Console.WriteLine("\n" + TranslateCode(s, pincode));
         }
         
@@ -273,6 +277,22 @@ namespace Krypteringsprogram
             {
                 output += numbers[count - pinNr];
             }
+        }
+
+        static bool CheckIfValidPincode(string pin)
+        {
+            //if pin length is not 4, it will return false
+            if (pin.Length != 4) { return false; }
+
+            //runs through each char in pin
+            foreach (char num in pin)
+            {
+                //if the char is a digit, it will set validPin to true, and continue the loop
+                if (Char.IsDigit(num)) { validPin = true; }
+                //if char is not a digit, it will break the loop and return false.
+                else { return false; }
+            }
+            return validPin;
         }
     }
 }
