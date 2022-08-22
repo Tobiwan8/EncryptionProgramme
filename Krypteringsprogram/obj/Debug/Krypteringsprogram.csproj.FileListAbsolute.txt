@@ -5,3 +5,11 @@ C:\VSProjects\Krypteringsprogram\Krypteringsprogram\obj\Debug\Krypteringsprogram
 C:\VSProjects\Krypteringsprogram\Krypteringsprogram\obj\Debug\Krypteringsprogram.csproj.CoreCompileInputs.cache
 C:\VSProjects\Krypteringsprogram\Krypteringsprogram\obj\Debug\Krypteringsprogram.exe
 C:\VSProjects\Krypteringsprogram\Krypteringsprogram\obj\Debug\Krypteringsprogram.pdb
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\bin\Debug\Krypteringsprogram.exe.config
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\bin\Debug\Krypteringsprogram.exe
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\bin\Debug\Krypteringsprogram.pdb
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\obj\Debug\Krypteringsprogram.csproj.AssemblyReference.cache
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\obj\Debug\Krypteringsprogram.csproj.SuggestedBindingRedirects.cache
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\obj\Debug\Krypteringsprogram.csproj.CoreCompileInputs.cache
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\obj\Debug\Krypteringsprogram.exe
+C:\Users\Tec\Source\Repos\EncryptionProgramme\Krypteringsprogram\obj\Debug\Krypteringsprogram.pdb
