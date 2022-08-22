@@ -10,15 +10,15 @@ namespace Krypteringsprogram
     internal class Program
     {
         /* This programme lets you encrypt a sentence with a pincode. When you want to decrypt your sentence,
-         you'll have to enter the same pincode for it to turn back to your original sentence */
+         you'll have to enter the same pincode for it to turn back to your original sentence. */
 
-        // All variables outside Main - created as fields
-        internal static string s = "";
-        internal static string pincode = "";
+        // All variables outside Main - created as fields.
+        static string s;
+        static string pincode;
 
         static void Main(string[] args)
         {
-            // Runs the menu until the application is closed
+            // Runs the menu until the application is closed.
             while (true)
             {
                 Menu();
@@ -27,19 +27,20 @@ namespace Krypteringsprogram
 
         static void Menu()
         {
+            // Display options in menu.
             Console.WriteLine("\n1. Generer kode\n2. Oversæt kode\n\nIndtast valg ");
 
-            // Gives the opportunity to choose from menu by pressing 1 or 2
+            // Gives the opportunity to choose from menu by pressing 1 or 2.
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.NumPad1:
                 case ConsoleKey.D1:
-                    // Generate encryption method
+                    // Generate encryption method.
                     GenerateOption();
                     break;
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.D2:
-                    // Generate decryption method
+                    // Generate decryption method.
                     DecryptOption();
                     break;
                 default:
@@ -49,15 +50,16 @@ namespace Krypteringsprogram
 
         static void GenerateOption()
         {
-            // User inputs sentence they want to encrypt
+            // User inputs sentence they want to encrypt.
             Console.Write("Indtast sætning for kryptering: ");
             s = Console.ReadLine();
-            // Asks user for a 4 digit code - loop will run untill they do
+            // Asks user for a 4 digit code - loop will run untill they do.
             do
             {
                 Console.Write("Indtast 4-cifret pinkode: ");
                 pincode = Console.ReadLine();
-            } while (PincodeCheck.CheckIfValidPincode(pincode) == false); //references to the class PincodeCheck, and the method inside
+                //references to the class PincodeCheck, and the method CheckIfValidPincode inside.
+            } while (PincodeCheck.CheckIfValidPincode(pincode) == false);
             // Runs and outputs the GenerateCode method.
             Console.WriteLine("\n" + Encryption.GenerateCode(s, pincode));
         }
